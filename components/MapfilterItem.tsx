@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { categoryItems } from '@/lib/categoriItems'
+import { categoryItems } from '@/lib/categoryItems'
 import Image from 'next/image'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
