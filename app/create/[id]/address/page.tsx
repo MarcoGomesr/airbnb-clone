@@ -16,7 +16,6 @@ import CreateBottomBar from '../createBottomBar'
 import { createLocation } from '../actions'
 
 export default function AddressPage({ params }: { params: { id: string } }) {
-  console.log(params)
   const [locationValue, setLocationValue] = useState('')
 
   const { getAllCountries } = useCountries()
