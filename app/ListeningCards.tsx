@@ -1,19 +1,34 @@
 import { useCountries } from '@/lib/getCountries'
+import {
+  AddToFavoritesButton,
+  RemoveFromFavoritesButton
+} from '@/components/SubmitButton'
 import Image from 'next/image'
 import Link from 'next/link'
+import { addToFavorites, deleteFavorite } from './actions'
 
 type ListeningCardsProps = {
   imagePath: string
   description: string
   price: number
   location: string
+  userId: string | undefined
+  isInFavoriteList: boolean
+  favoriteId: string | undefined
+  homeId: string
+  pathName: string
 }
 
 export function ListeningCards({
   imagePath,
   description,
   price,
-  location
+  location,
+  userId,
+  isInFavoriteList,
+  favoriteId,
+  homeId,
+  pathName
 }: ListeningCardsProps) {
   const { getCountryByValue } = useCountries()
 
@@ -29,6 +44,26 @@ export function ListeningCards({
           sizes="288px"
           className="object-cover rounded-lg h-full"
         />
+        {userId && (
+          <div className="z-10 absolute top-2 right-2">
+            {isInFavoriteList ? (
+              <form action={deleteFavorite}>
+                <input type="hidden" name="favoriteId" value={favoriteId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+                <RemoveFromFavoritesButton />
+              </form>
+            ) : (
+              <form action={addToFavorites}>
+                <input type="hidden" name="homeId" value={homeId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+
+                <AddToFavoritesButton />
+              </form>
+            )}
+          </div>
+        )}
       </div>
 
       <Link href={`/`} className="mt-2">

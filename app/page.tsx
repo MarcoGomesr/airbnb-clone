@@ -4,11 +4,14 @@ import { prisma } from '@/lib/prisma'
 import { ListeningCards } from './ListeningCards'
 import SkeletonCard from './SkeletonCard'
 import NoItems from './NoItems'
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 
 async function getHomes({
-  searchParams
+  searchParams,
+  userId
 }: {
   searchParams?: { filter?: string }
+  userId: string | undefined
 }) {
   const data = await prisma.home.findMany({
     where: {
@@ -22,7 +25,12 @@ async function getHomes({
       description: true,
       price: true,
       country: true,
-      photo: true
+      photo: true,
+      Favorite: {
+        where: {
+          userId: userId ?? undefined
+        }
+      }
     }
   })
   return data
@@ -49,7 +57,9 @@ async function ShowItems({
 }: {
   searchParams: { filter?: string }
 }) {
-  const homes = await getHomes({ searchParams: searchParams })
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
+  const homes = await getHomes({ searchParams: searchParams, userId: user?.id })
 
   return (
     <>
@@ -64,6 +74,11 @@ async function ShowItems({
               description={home.description as string}
               price={home.price as number}
               location={home.country as string}
+              userId={user?.id}
+              favoriteId={home.Favorite[0]?.id}
+              isInFavoriteList={home.Favorite.length > 0 ? true : false}
+              homeId={home.id}
+              pathName="/"
             />
           ))}
         </div>
@@ -75,6 +90,9 @@ async function ShowItems({
 function SkeletonLoading() {
   return (
     <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
       <SkeletonCard />
     </div>
   )
