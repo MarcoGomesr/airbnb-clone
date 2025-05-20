@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+
+import { useState, use } from 'react'
 import dynamic from 'next/dynamic'
 import { useCountries } from '@/lib/getCountries'
 import {
@@ -15,7 +16,12 @@ import { Skeleton } from '@/components/ui/skeleton'
 import CreateBottomBar from '../createBottomBar'
 import { createLocation } from '../actions'
 
-export default function AddressPage({ params }: { params: { id: string } }) {
+export default function AddressPage({
+  params
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = use(params)
   const [locationValue, setLocationValue] = useState('')
 
   const { getAllCountries } = useCountries()
@@ -33,7 +39,7 @@ export default function AddressPage({ params }: { params: { id: string } }) {
         </h2>
       </div>
       <form action={createLocation}>
-        <input type="hidden" name="id" value={params.id} />
+        <input type="hidden" name="id" value={id} />
         <input type="hidden" name="country" value={locationValue} />
 
         <div className="w-3/5 mx-auto">
