@@ -7,7 +7,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import { cn } from '@/lib/utils'
 
-export default function MapfilterItem() {
+export default function MapFilterItem() {
   const searchParams = useSearchParams()
   const search = searchParams.get('filter')
 
@@ -41,6 +41,7 @@ export default function MapfilterItem() {
               src={item.imageUrl}
               alt={item.title}
               fill
+              sizes="24px"
               className="object-cover"
             />
           </div>
