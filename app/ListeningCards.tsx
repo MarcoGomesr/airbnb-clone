@@ -5,7 +5,7 @@ import {
 } from '@/components/SubmitButton'
 import Image from 'next/image'
 import Link from 'next/link'
-import { addToFavorites, deleteFavorite } from './actions'
+import { addToFavorites, deleteFavorite } from './favorites/actions'
 
 type ListeningCardsProps = {
   imagePath: string
@@ -66,7 +66,7 @@ export function ListeningCards({
         )}
       </div>
 
-      <Link href={`/`} className="mt-2">
+      <Link href={`/home/${homeId}`} className="mt-2">
         <h3 className="font-medium text-base">
           {country?.flag} {country?.label} / {country?.region}
         </h3>
