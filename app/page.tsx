@@ -1,10 +1,13 @@
 import { Suspense } from 'react'
-import MapFilterItem from '@/components/MapFilterItem'
-import { prisma } from '@/lib/prisma'
-import { ListeningCards } from './ListeningCards'
-import SkeletonCard from './SkeletonCard'
-import NoItems from './NoItems'
+import { unstable_noStore as noStore } from 'next/cache'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+
+import { prisma } from '@/shared/lib/prisma'
+
+import MapFilterItem from '@/shared/components/MapFilterItem'
+import NoItems from './NoItems'
+import SkeletonCard from './components/SkeletonCard'
+import { ListeningCards } from './ListeningCards'
 
 async function getHomes({
   searchParams,
@@ -19,6 +22,7 @@ async function getHomes({
   }
   userId: string | undefined
 }) {
+  noStore()
   const data = await prisma.home.findMany({
     where: {
       addedCategory: true,

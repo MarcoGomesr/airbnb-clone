@@ -1,8 +1,8 @@
-import { useCountries } from '@/lib/getCountries'
+import { useCountries } from '@/shared/utils/getCountries'
 import {
   AddToFavoritesButton,
   RemoveFromFavoritesButton
-} from '@/components/SubmitButton'
+} from '@/shared/components/SubmitButton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { addToFavorites, deleteFavorite } from './favorites/actions'

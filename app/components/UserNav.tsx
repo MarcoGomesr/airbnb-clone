@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '../../components/ui/dropdown-menu'
+} from '../../shared/components/ui/dropdown-menu'
 import {
   RegisterLink,
   LoginLink,
@@ -14,7 +14,7 @@ import {
 
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import Link from 'next/link'
-import { createAirbnbHome } from '../create/[id]/actions'
+import { createAirbnbHome } from '../(pages)/create/[id]/actions'
 
 export async function UserNav() {
   const { getUser } = getKindeServerSession()

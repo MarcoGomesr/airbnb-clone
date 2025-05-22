@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '@/components/ui/dialog'
+} from '@/shared/components/ui/dialog'
 import {
   Select,
   SelectContent,
@@ -19,13 +19,13 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue
-} from '@/components/ui/select'
-import { useCountries } from '@/lib/getCountries'
+} from '@/shared/components/ui/select'
+import { useCountries } from '@/shared/utils/getCountries'
 import { HomeMap } from '../home/[id]/HomeMap'
-import { Button } from '@/components/ui/button'
-import SubmitButton from '@/components/SubmitButton'
-import { Card, CardHeader } from '@/components/ui/card'
-import Counter from '../create/[id]/description/Counter'
+import { Button } from '@/shared/components/ui/button'
+import SubmitButton from '@/shared/components/SubmitButton'
+import { Card, CardHeader } from '@/shared/components/ui/card'
+import Counter from '../(pages)/create/[id]/description/Counter'
 
 export default function SearchComponent() {
   const [step, setStep] = useState(1)
