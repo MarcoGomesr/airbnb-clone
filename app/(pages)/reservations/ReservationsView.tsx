@@ -1,8 +1,9 @@
-import NoItems from '../NoItems'
-import { ListeningCards } from '../ListeningCards'
+import NoItems from '../../NoItems'
+import { ListeningCards } from '../../ListeningCards'
+import { ReservationWithHome } from './types'
 
 type ReservationsViewProps = {
-  reservations: any
+  reservations: ReservationWithHome[]
 }
 
 export default function ReservationsView({

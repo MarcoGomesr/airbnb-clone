@@ -4,7 +4,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 
 import { prisma } from '@/shared/lib/prisma'
 
-import MapFilterItem from '@/shared/components/MapFilterItem'
+import MapFilterItem from '@/shared/components/general/MapFilterItem'
 import NoItems from './NoItems'
 import SkeletonCard from './components/SkeletonCard'
 import { ListeningCards } from './ListeningCards'

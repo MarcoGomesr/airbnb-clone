@@ -1,10 +1,18 @@
-import { Reservation, Home, Favorite, User } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
-// This gives you the complete Reservation type with all fields and relations
-type FullReservation = Reservation & {
-  Home: Home & {
-    Favorite: Favorite[]
-    User: User | null
+type ReservationWithHome = Prisma.ReservationGetPayload<{
+  select: {
+    Home: {
+      select: {
+        id: true
+        country: true
+        photo: true
+        description: true
+        price: true
+        Favorite: {
+          where: { userId: string }
+        }
+      }
+    }
   }
-  User: User | null
-}
+}>
