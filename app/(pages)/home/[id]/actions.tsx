@@ -1,7 +1,8 @@
 'use server'
 
-import { prisma } from '@/shared/lib/prisma'
 import { redirect } from 'next/navigation'
+
+import HomeDetailsService from './homeDetailService'
 
 export async function createReservation(formData: FormData) {
   const userId = formData.get('userId') as string
@@ -10,13 +11,11 @@ export async function createReservation(formData: FormData) {
   const startDate = formData.get('startDate') as string
   const endDate = formData.get('endDate') as string
 
-  const data = await prisma.reservation.create({
-    data: {
-      userId,
-      homeId,
-      startDate,
-      endDate
-    }
+  await HomeDetailsService.createReservation({
+    userId,
+    homeId,
+    startDate,
+    endDate
   })
 
   return redirect('/')

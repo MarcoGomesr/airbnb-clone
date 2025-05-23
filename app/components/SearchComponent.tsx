@@ -48,12 +48,12 @@ export default function SearchComponent() {
     <Dialog>
       <DialogTrigger asChild>
         <div className="rounded-full py-2 px-5 border flex items-center cursor">
-          <div className="flex h-full divide-x font-medium">
+          <div className="flex h-full divide-x font-medium cursor-pointer">
             <p className="px-4">Anywhere</p>
             <p className="px-4">Any Week</p>
             <p className="px-4">Add Guests</p>
           </div>
-          <Search className="bg-primary text-white p-1 w-8 h-8 rounded-full" />
+          <Search className="bg-primary text-white p-1 w-8 h-8 rounded-full cursor-pointer" />
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

@@ -1,5 +1,7 @@
-import { ListeningCards } from '@/shared/components/general/ListeningCard'
+
 import NoItems from '@/app/components/NoItems'
+
+import ListeningCard from '@/shared/components/general/ListeningCard'
 import { type FavoritesViewProps } from './types'
 
 export default function FavoritesView({
@@ -17,7 +19,7 @@ export default function FavoritesView({
       ) : (
         <div className="grid lg:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-8 mt-8">
           {favorites.map((favorite) => (
-            <ListeningCards
+            <ListeningCard
               key={favorite.Home.id}
               description={favorite.Home.description as string}
               imagePath={favorite.Home.photo as string}
