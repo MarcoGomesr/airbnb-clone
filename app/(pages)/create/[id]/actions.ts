@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import createService from './createService'
+import locationService from './address/locationService'
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await createService.findLatestHome(userId)
@@ -81,7 +82,7 @@ export async function createLocation(formData: FormData) {
   const homeId = formData.get('id') as string
   const country = formData.get('country') as string
 
-  const data = await createService.updateLocation(homeId, country)
+  await locationService.updateLocation(homeId, country)
 
   return redirect('/')
 }

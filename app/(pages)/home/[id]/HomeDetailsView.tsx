@@ -40,7 +40,7 @@ export default function HomeDetailsView({home, user, country, id}: {home: HomeDe
           <div className="flex items-center mt-6">
             <img
               src={
-                home?.User?.profileImage ??
+                home?.User?.profilePicture ??
                 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg'
               }
               alt="User Profile"
@@ -67,7 +67,12 @@ export default function HomeDetailsView({home, user, country, id}: {home: HomeDe
         <form action={createReservation} data-testid="reservation-form">
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={id} />
-          <SelectCalendar reservation={home?.Reservation} />
+          <SelectCalendar 
+            reservation={home?.Reservation?.map(res => ({
+              startDate: res.startDate.toISOString(),
+              endDate: res.endDate.toISOString()
+            }))} 
+          />
 
           {user.id ? (
             <Button className="w-full" type="submit">
