@@ -1,5 +1,5 @@
 import { FlatCompat } from '@eslint/eslintrc'
-import nextPlugin from '@next/eslint-plugin-next'
+import nextPlugin from '@next/eslint-plugin-next/dist/index.js'
 import tsPlugin from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import { dirname } from 'path'
