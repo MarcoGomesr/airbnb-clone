@@ -64,7 +64,7 @@ export default function HomeDetailsView({home, user, country, id}: {home: HomeDe
           <HomeMap locationValue={country?.value as string} />
         </div>
 
-        <form action={createReservation}>
+        <form action={createReservation} data-testid="reservation-form">
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={id} />
           <SelectCalendar reservation={home?.Reservation} />

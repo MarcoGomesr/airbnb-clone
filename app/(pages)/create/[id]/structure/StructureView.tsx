@@ -16,7 +16,7 @@ export const StructureView = ({ id }: StructureViewProps) => {
           Which of these best describes your home?
         </h2>
       </div>
-      <form action={createCategoryPage}>
+      <form action={createCategoryPage} data-testid="structure-form">
         <input type="hidden" name="id" value={id} />
         <SelectCategory />
         <CreateBottomBar />

@@ -21,7 +21,7 @@ export const DescriptionView = ({ id }: DescriptionViewProps) => {
         </h2>
       </div>
 
-      <form action={createDescriptionPage}>
+      <form action={createDescriptionPage} data-testid="description-form">
         <input type="hidden" name="id" value={id} />
         <div className="mx-auto w-3/5 mt-10 flex flex-col gap-y-5 mb-36">
           <div className="flex flex-col gap-y-2">
@@ -61,6 +61,7 @@ export const DescriptionView = ({ id }: DescriptionViewProps) => {
               type="file"
               name="image"
               accept="image/*"
+              id="image"
               required
               className="cursor-pointer"
             />
