@@ -5,7 +5,7 @@ import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import { Textarea } from '@/shared/components/ui/textarea'
 import Counter from './Counter'
-import CreateBottomBar from '../createBottomBar'
+import CreateBottomBar from '@/shared/components/general/createBottomBar'
 import { createDescriptionPage } from '../actions'
 
 type DescriptionViewProps = {

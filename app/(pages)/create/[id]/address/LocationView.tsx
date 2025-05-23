@@ -1,9 +1,9 @@
 'use client'
 
-import { useLocation } from '../useLocation'
-import { LocationForm } from './LocationForm'
-import CreateBottomBar from '../../createBottomBar'
-import { createLocation } from '../actions'
+import { useLocation } from './useLocation'
+import { LocationForm } from './components/LocationForm'
+import CreateBottomBar from '@/shared/components/general/createBottomBar'
+import { createLocation } from './actions'
 
 type LocationViewProps = {
   id: string

@@ -12,10 +12,7 @@ export async function createLocation(formData: FormData) {
     throw new Error('Missing required fields')
   }
 
-  await locationService.updateLocation({
-    homeId,
-    country
-  })
+  await locationService.updateLocation(homeId, country)
 
   return redirect('/')
 }

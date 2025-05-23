@@ -56,18 +56,6 @@ const createService = {
     })
   },
 
-  async updateLocation(homeId: string, country: string) {
-    return await prisma.home.update({
-      where: {
-        id: homeId
-      },
-      data: {
-        country,
-        addedLocation: true
-      }
-    })
-  },
-
   async uploadImage(image: File) {
     return await supabase.storage
       .from('images')

@@ -1,13 +1,17 @@
 import { prisma } from '@/shared/lib/prisma'
 
 const locationService = {
-  async updateLocation(data: { homeId: string; country: string }) {
+  async updateLocation(homeId: string, country: string) {
+    if (!homeId || !country) {
+      throw new Error('Missing required fields')
+    }
+
     return await prisma.home.update({
       where: {
-        id: data.homeId
+        id: homeId
       },
       data: {
-        country: data.country,
+        country,
         addedLocation: true
       }
     })

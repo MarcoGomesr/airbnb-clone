@@ -1,5 +1,5 @@
 import { use } from 'react'
-import { LocationView } from './components/LocationView'
+import { LocationView } from './LocationView'
 
 export default function AddressPage({
   params

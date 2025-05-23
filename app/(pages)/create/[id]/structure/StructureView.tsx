@@ -2,7 +2,7 @@
 
 import { SelectCategory } from '@/shared/components/general/SelectCategory'
 import { createCategoryPage } from '../actions'
-import CreateBottomBar from '../createBottomBar'
+import CreateBottomBar from '@/shared/components/general/createBottomBar'
 
 type StructureViewProps = {
   id: string
