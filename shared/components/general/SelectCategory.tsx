@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-import { categoryItems } from '@/lib/categoryItems'
-import { Card, CardHeader } from './ui/card'
+import { categoryItems } from '@/shared/data/categoryItems'
+import { Card, CardHeader } from '@/shared/components/ui/card'
 
 export function SelectCategory() {
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(

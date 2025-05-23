@@ -1,122 +1,56 @@
-import { Suspense } from 'react'
-import { unstable_noStore as noStore } from 'next/cache'
+// page.tsx
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import homeService from './homeService'
+import { SearchParams } from './homeTypes'
+import NoItems from './components/NoItems';
+import MapFilterItems from '@/shared/components/general/MapFilterItem';
+import ListeningCard from '@/shared/components/general/ListeningCard';
+import { Suspense } from 'react';
+import SkeletonLoading from './components/SkeletonLoading';
 
-import { prisma } from '@/shared/lib/prisma'
-
-import MapFilterItem from '@/shared/components/general/MapFilterItem'
-import NoItems from './NoItems'
-import SkeletonCard from './components/SkeletonCard'
-import { ListeningCards } from './ListeningCards'
-
-async function getHomes({
-  searchParams,
-  userId
-}: {
-  searchParams?: {
-    filter?: string
-    country?: string
-    guests?: string
-    bedrooms?: string
-    bathrooms?: string
-  }
-  userId: string | undefined
-}) {
-  noStore()
-  const data = await prisma.home.findMany({
-    where: {
-      addedCategory: true,
-      addedLocation: true,
-      addedDescription: true,
-      categoryName: searchParams?.filter ?? undefined,
-      country: searchParams?.country ?? undefined,
-      guests: searchParams?.guests ?? undefined,
-      bedrooms: searchParams?.bedrooms ?? undefined,
-      bathrooms: searchParams?.bathrooms ?? undefined
-    },
-    select: {
-      id: true,
-      description: true,
-      price: true,
-      country: true,
-      photo: true,
-      Favorite: {
-        where: {
-          userId: userId ?? undefined
-        }
-      }
-    }
-  })
-  return data
-}
-
-export default function Home({
-  searchParams
-}: {
-  searchParams?: { filter?: string }
-}) {
+export default async function HomePage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const searchParamsResult = await searchParams
   return (
     <div className="container mx-auto px-5 lg:px-10">
-      <MapFilterItem />
+    <MapFilterItems />
 
-      <Suspense key={searchParams?.filter} fallback={<SkeletonLoading />}>
-        <ShowItems searchParams={searchParams ?? {}} />
-      </Suspense>
-    </div>
-  )
+    <Suspense key={searchParamsResult?.filter} fallback={<SkeletonLoading />}>
+      <ShowItems searchParams={searchParamsResult} />
+    </Suspense>
+</div>)
 }
 
-async function ShowItems({
-  searchParams
-}: {
-  searchParams: {
-    filter?: string
-    country?: string
-    guests?: string
-    bedrooms?: string
-    bathrooms?: string
-  }
-}) {
+async function ShowItems({ searchParams }: { searchParams: SearchParams}) {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
-  const homes = await getHomes({ searchParams: searchParams, userId: user?.id })
+
+  const homes = await homeService.getHomeService(searchParams, user?.id)
 
   return (
     <>
       {homes.length === 0 ? (
         <NoItems
-          title="Sorry no listings for this category found..."
-          description=" Please check other category or create your own listing!"
+          description="Please check a other category or create your own listing!"
+          title="Sorry no listings found for this category..."
         />
       ) : (
-        <div className="grid lg:grid-cols-4 sm:grid-cols-3 gap-8 mt-8">
-          {homes.map((home) => (
-            <ListeningCards
-              key={home.id}
-              imagePath={home.photo as string}
-              description={home.description as string}
-              price={home.price as number}
-              location={home.country as string}
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+          {homes.map((item) => (
+            <ListeningCard
+              key={item.id}
+              description={item.description as string}
+              imagePath={item.photo as string}
+              location={item.country as string}
+              price={item.price as number}
               userId={user?.id}
-              favoriteId={home.Favorite[0]?.id}
-              isInFavoriteList={home.Favorite.length > 0 ? true : false}
-              homeId={home.id}
+              favoriteId={item.Favorite[0]?.id}
+              isInFavoriteList={item.Favorite.length > 0 ? true : false}
+              homeId={item.id}
               pathName="/"
             />
           ))}
         </div>
       )}
     </>
-  )
-}
-
-function SkeletonLoading() {
-  return (
-    <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
-      <SkeletonCard />
-      <SkeletonCard />
-      <SkeletonCard />
-      <SkeletonCard />
-    </div>
-  )
+  );
 }

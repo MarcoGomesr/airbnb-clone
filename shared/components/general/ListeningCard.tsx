@@ -1,11 +1,11 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import { useCountries } from '@/shared/utils/getCountries'
 import {
   AddToFavoritesButton,
   RemoveFromFavoritesButton
-} from '@/shared/components/SubmitButton'
-import Image from 'next/image'
-import Link from 'next/link'
-import { addToFavorites, deleteFavorite } from './favorites/actions'
+} from '@/shared/components/general/SubmitButton'
+import { addToFavorites, deleteFavorite } from '@/app/(pages)/favorites/favoriteActions'
 
 type ListeningCardsProps = {
   imagePath: string
@@ -19,7 +19,7 @@ type ListeningCardsProps = {
   pathName: string
 }
 
-export function ListeningCards({
+export default function ListeningCard({
   imagePath,
   description,
   price,

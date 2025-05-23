@@ -1,4 +1,4 @@
-import { SelectCategory } from '@/shared/components/SelectCategory'
+import { SelectCategory } from '@/shared/components/general/SelectCategory'
 import { createCategoryPage } from '../actions'
 import CreateBottomBar from '../createBottomBar'
 

@@ -23,8 +23,6 @@ export async function deleteFavorite(formData: FormData) {
   const userId = formData.get('userId') as string
 
   if (!favoriteId || !userId) {
-    console.log('favoriteId', favoriteId)
-    console.log('userId', userId)
     throw new Error('Missing required fields')
   }
 

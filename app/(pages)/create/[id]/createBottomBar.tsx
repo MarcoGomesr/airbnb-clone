@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Button } from '@/shared/components/ui/button'
-import SubmitButton from '@/shared/components/SubmitButton'
+import SubmitButton from '@/shared/components/general/SubmitButton'
 
 export default function CreateBottomBar() {
   return (

@@ -21,9 +21,9 @@ import {
   SelectValue
 } from '@/shared/components/ui/select'
 import { useCountries } from '@/shared/utils/getCountries'
-import { HomeMap } from '../home/[id]/HomeMap'
+import { HomeMap } from '@/shared/components/general/HomeMap'
 import { Button } from '@/shared/components/ui/button'
-import SubmitButton from '@/shared/components/SubmitButton'
+import SubmitButton from '@/shared/components/general/SubmitButton'
 import { Card, CardHeader } from '@/shared/components/ui/card'
 import Counter from '../(pages)/create/[id]/description/Counter'
 

@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '../../shared/components/ui/dropdown-menu'
+} from '@/shared/components/ui/dropdown-menu'
 import {
   RegisterLink,
   LoginLink,
@@ -55,7 +55,7 @@ export async function UserNav() {
 
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href="/my-homes" className="w-full">
+                <Link href="/listening" className="w-full">
                   My Listings
                 </Link>
               </DropdownMenuItem>

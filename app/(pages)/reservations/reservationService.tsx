@@ -1,9 +1,10 @@
 import { prisma } from '@/shared/lib/prisma'
-import { ReservationWithHome } from './types'
+
+import { ReservationWithHome } from './ReservationTypes'
 
 const reservationService = {
-  getUserReservations(userId: string): Promise<ReservationWithHome[]> {
-    return prisma.reservation.findMany({
+  async getUserReservations(userId: string): Promise<ReservationWithHome[]> {
+    return await prisma.reservation.findMany({
       where: { userId },
       select: {
         Home: {

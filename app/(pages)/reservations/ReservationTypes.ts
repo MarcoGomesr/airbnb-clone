@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 
-type ReservationWithHome = Prisma.ReservationGetPayload<{
+export type ReservationWithHome = Prisma.ReservationGetPayload<{
   select: {
     Home: {
       select: {

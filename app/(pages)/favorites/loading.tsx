@@ -1,4 +1,4 @@
-import SkeletonCard from '../components/SkeletonCard'
+import SkeletonCard from '@/shared/components/general/SkeletonCard'
 
 export default function FavoritesLoading() {
   return (
