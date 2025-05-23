@@ -1,26 +1,13 @@
 'use server'
 
-import { prisma } from '@/shared/lib/prisma'
-import { supabase } from '@/shared/lib/suparbase'
 import { redirect } from 'next/navigation'
+import createService from './createService'
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
-  const data = await prisma.home.findFirst({
-    where: {
-      userId
-    },
-    orderBy: {
-      createdAt: 'desc'
-    }
-  })
+  const data = await createService.findLatestHome(userId)
 
   if (data === null) {
-    const data = await prisma.home.create({
-      data: {
-        userId
-      }
-    })
-
+    const data = await createService.createNewHome(userId)
     return redirect(`/create/${data.id}/structure`)
   } else if (
     !data.addedCategory &&
@@ -41,26 +28,16 @@ export async function createAirbnbHome({ userId }: { userId: string }) {
     data.addedDescription &&
     data.addedLocation
   ) {
-    const data = await prisma.home.create({
-      data: {
-        userId
-      }
-    })
-
+    const data = await createService.createNewHome(userId)
     return redirect(`/create/${data.id}/structure`)
   }
 }
 
 export async function createCategoryPage(formData: FormData) {
-  const data = await prisma.home.update({
-    where: {
-      id: formData.get('id') as string
-    },
-    data: {
-      categoryName: formData.get('categoryName') as string,
-      addedCategory: true
-    }
-  })
+  const data = await createService.updateCategory(
+    formData.get('id') as string,
+    formData.get('categoryName') as string
+  )
 
   return redirect(`/create/${data.id}/description`)
 }
@@ -76,28 +53,21 @@ export async function createDescriptionPage(formData: FormData) {
   const bathrooms = formData.get('bathrooms') as string
 
   // Upload image to Supabase
-  const { data: imageData } = await supabase.storage
-    .from('images')
-    .upload(`${image.name}-${new Date().getTime()}`, image, {
-      cacheControl: '2592000',
-      contentType: 'image/png'
-    })
+  const { data: imageData } = await createService.uploadImage(image)
+
+  if (!imageData?.path) {
+    throw new Error('Failed to upload image')
+  }
 
   // Update home in database
-  const data = await prisma.home.update({
-    where: {
-      id: homeId
-    },
-    data: {
-      title,
-      description,
-      price: Number(price),
-      guests,
-      bedrooms,
-      bathrooms,
-      photo: imageData?.path,
-      addedDescription: true
-    }
+  const data = await createService.updateDescription(homeId, {
+    title,
+    description,
+    price: Number(price),
+    guests,
+    bedrooms,
+    bathrooms,
+    photo: imageData.path
   })
 
   if (!data) {
@@ -111,15 +81,7 @@ export async function createLocation(formData: FormData) {
   const homeId = formData.get('id') as string
   const country = formData.get('country') as string
 
-  const data = await prisma.home.update({
-    where: {
-      id: homeId
-    },
-    data: {
-      country,
-      addedLocation: true
-    }
-  })
+  const data = await createService.updateLocation(homeId, country)
 
   return redirect('/')
 }
