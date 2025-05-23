@@ -8,7 +8,7 @@ export default async function ReservationPage() {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
 
-  if (!user.id) return redirect('/')
+  if (!user) return redirect('/')
 
   const reservations = await getUserReservations(user.id)
   return <ReservationsView reservations={reservations} userId={user.id} />
