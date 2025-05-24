@@ -1,3 +1,5 @@
+import { Favorite } from '@prisma/client'
+
 export type FavoritesViewProps = {
   favorites: FavoriteWithHome[]
   userId: string

@@ -2,9 +2,9 @@
 import NoItems from '@/app/components/NoItems'
 
 import ListeningCard from '@/shared/components/general/ListeningCard'
-import { type FavoritesViewProps } from './types'
+import { type FavoritesViewProps } from './favorite.types'
 
-export default function FavoritesView({
+export default function FavoriteView({
   favorites,
   userId
 }: FavoritesViewProps) {
