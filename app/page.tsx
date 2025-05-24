@@ -1,26 +1,31 @@
 // page.tsx
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import homeService from './homeService'
-import { SearchParams } from './homeTypes'
-import NoItems from './components/NoItems';
-import MapFilterItems from '@/shared/components/general/MapFilterItem';
-import ListeningCard from '@/shared/components/general/ListeningCard';
-import { Suspense } from 'react';
-import SkeletonLoading from './components/SkeletonLoading';
+import { SearchParams } from './home.types'
+import NoItems from './components/NoItems'
+import MapFilterItems from '@/shared/components/general/MapFilterItem'
+import ListeningCard from '@/shared/components/general/ListeningCard'
+import { Suspense } from 'react'
+import SkeletonLoading from './components/SkeletonLoading'
 
-export default async function HomePage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+export default async function HomePage({
+  searchParams
+}: {
+  searchParams: Promise<SearchParams>
+}) {
   const searchParamsResult = await searchParams
   return (
     <div className="container mx-auto px-5 lg:px-10">
-    <MapFilterItems />
+      <MapFilterItems />
 
-    <Suspense key={searchParamsResult?.filter} fallback={<SkeletonLoading />}>
-      <ShowItems searchParams={searchParamsResult} />
-    </Suspense>
-</div>)
+      <Suspense key={searchParamsResult?.filter} fallback={<SkeletonLoading />}>
+        <ShowItems searchParams={searchParamsResult} />
+      </Suspense>
+    </div>
+  )
 }
 
-async function ShowItems({ searchParams }: { searchParams: SearchParams}) {
+async function ShowItems({ searchParams }: { searchParams: SearchParams }) {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
 
@@ -52,5 +57,5 @@ async function ShowItems({ searchParams }: { searchParams: SearchParams}) {
         </div>
       )}
     </>
-  );
+  )
 }

@@ -1,8 +1,11 @@
-import { prisma } from "@/shared/lib/prisma"
-import { Home, SearchParams } from "./homeTypes"
+import { prisma } from '@/shared/lib/prisma'
+import { Home, SearchParams } from './home.types'
 
 const homeService = {
-  async getHomeService(searchParams: SearchParams, userId: string | undefined): Promise<Home[]> {
+  async getHomeService(
+    searchParams: SearchParams,
+    userId: string | undefined
+  ): Promise<Home[]> {
     return await prisma.home.findMany({
       where: {
         addedCategory: true,
