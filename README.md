@@ -1,4 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Airbnb Clone
+
+A modern Airbnb clone built with Next.js 14, featuring a responsive design and full-stack functionality.
+
+![Airbnb Clone Preview](/public/github-readme-description.png)
+
+## Description
+
+This project is a feature-rich Airbnb clone that replicates the core functionality of the popular accommodation booking platform. It includes property listings, search functionality, user authentication, and booking management.
+
+## Features
+
+- 🔐 User Authentication with Kinde
+- 🏠 Property Listings with Images
+- 🔍 Advanced Search Functionality
+- 📍 Location-based Search with Map Integration
+- 📅 Date Range Selection
+- 💳 Booking Management
+- 📱 Responsive Design
+- 🌐 Server-side Rendering
+- 🔒 Protected Routes
+- 🎨 Modern UI with Tailwind CSS
+
+## Tech Stack
+
+- **Framework:** Next.js 14
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Database:** Prisma with PostgreSQL
+- **Authentication:** Kinde
+- **Maps:** Leaflet
+- **Testing:** Jest & React Testing Library
+- **Icons:** Lucide React
+- **UI Components:** Shadcn UI
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
+3. Set up environment variables:
+
+```bash
+cp .env.example .env
+```
+
+4. Configure your environment variables:
+
+- `KINDE_CLIENT_ID`
+- `KINDE_CLIENT_SECRET`
+- `KINDE_ISSUER_URL`
+- `KINDE_SITE_URL`
+- `KINDE_POST_LOGIN_REDIRECT_URL`
+- `KINDE_POST_LOGOUT_REDIRECT_URL`
+- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+
+5. Run database migrations:
+
+```bash
+pnpm prisma generate
+pnpm prisma db push
+```
+
+6. Start the development server:
+
+```bash
+pnpm dev
+```
+
+## Setup
+
+1. **Database Setup**
+
+   - Ensure PostgreSQL is installed and running
+   - Create a new database
+   - Update the DATABASE_URL in your .env file
+
+2. **Authentication Setup**
+
+   - Create a Kinde account
+   - Set up a new application
+   - Configure the callback URLs
+   - Add the credentials to your .env file
+
+3. **Cloudinary Setup**
+   - Create a Cloudinary account
+   - Create a new cloud
+   - Add the cloud name to your .env file
+
+## Development
+
+- Run tests: `pnpm test`
+- Run tests in watch mode: `pnpm test:watch`
+- Build the project: `pnpm build`
+- Start production server: `pnpm start`
+- Run linting: `pnpm lint`
+
+## Project Structure
+
+```
+├── app/
+│   ├── components/     # React components
+│   ├── actions/        # Server actions
+│   ├── api/           # API routes
+│   └── (routes)/      # App routes
+├── public/            # Static files
+├── prisma/           # Database schema
+└── shared/           # Shared utilities
+```
 
 ## Getting Started
 
