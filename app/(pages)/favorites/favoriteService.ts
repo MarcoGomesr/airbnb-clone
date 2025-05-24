@@ -1,9 +1,8 @@
 import { prisma } from '@/shared/lib/prisma'
-
 import { FavoriteWithHome } from './favorite.types'
 
 const favoriteService = {
-  async getFavoriteService(userId: string): Promise {
+  async getFavorites(userId: string): Promise<FavoriteWithHome[]> {
     const favorites = await prisma.favorite.findMany({
       where: {
         userId: userId
