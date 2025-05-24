@@ -10,13 +10,19 @@ export default function Navbar() {
   return (
     <nav className="w-full border-b mb-10">
       <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-5">
-        <Link href="/">
+        <Link href="/" data-testid="home-link">
           <Image
             src={DesktopLogo}
             alt="Airbnb"
             className="w-32 hidden lg:block"
+            data-testid="desktop-logo"
           />
-          <Image src={MobileLogo} alt="Airbnb" className="w-12 lg:hidden" />
+          <Image 
+            src={MobileLogo} 
+            alt="Airbnb" 
+            className="w-12 lg:hidden" 
+            data-testid="mobile-logo"
+          />
         </Link>
         <SearchComponent />
         <UserNav />
