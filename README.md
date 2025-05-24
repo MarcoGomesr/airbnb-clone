@@ -108,13 +108,47 @@ pnpm dev
 
 ```
 ├── app/
-│   ├── components/     # React components
-│   ├── actions/        # Server actions
-│   ├── api/           # API routes
-│   └── (routes)/      # App routes
-├── public/            # Static files
-├── prisma/           # Database schema
-└── shared/           # Shared utilities
+│   ├── components/           # Reusable UI components
+│   │   ├── ui/              # Basic UI components
+│   │   ├── forms/           # Form-related components
+│   │   └── modals/          # Modal components
+│   │
+│   ├── (pages)/             # Main application pages
+│   │   ├── home/           # Home page and property details
+│   │   ├── create/         # Property creation flow
+│   │   ├── favorites/      # User's favorite properties
+│   │   │   ├── page.tsx             # Next.js page entry
+│   │   │   ├── FavoriteView.tsx     # The main view component
+│   │   │   ├── favorite.actions.ts  # All related actions
+│   │   │   ├── favorite.service.ts  # Business logic (API calls, etc.)
+│   │   │   └── favorite.types.ts    # All types/interfaces related to the feature
+│   │   ├── listening/      # Property listings
+│   │   └── reservations/   # Booking management
+│   │
+│   ├── api/                # API routes
+│   │   ├── auth/          # Authentication endpoints
+│   │   └── homes/         # Property-related endpoints
+│   │
+│   ├── actions/            # Server actions
+│   │   ├── getHomes.ts    # Property fetching logic
+│   │   └── homeService.ts # Property service functions
+│   │
+│   ├── layout.tsx         # Root layout component
+│   ├── page.tsx           # Home page component
+│   ├── globals.css        # Global styles
+│   └── homeTypes.ts       # TypeScript types
+│
+├── public/                # Static assets
+│   ├── images/           # Image files
+│   └── icons/            # Icon files
+│
+└── shared/              # Shared utilities
+    ├── components/      # Shared UI components
+    ├── data/           # Static data and constants
+    ├── lib/            # Library configurations
+    ├── prisma/         # Prisma client setup
+    ├── types/          # Shared TypeScript types
+    └── utils/          # Helper functions
 ```
 
 ## Getting Started
